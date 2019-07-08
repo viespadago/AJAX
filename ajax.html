@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+  <title>AJAX</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <style type="text/css">
+    div {
+        text-align: center;
+        padding: 5px;
+        margin: 20px;
+        background-color: #2a92fb;
+    }
+    button {
+  		width: 98.6%;
+  		border: none;
+  		margin-top: 5px;
+  		color: white;
+  		background-color: #1d3dda;
+  		border-radius: 5px;
+  		padding: 12px;
+	}
+  </style>
+</head>
+<body>
+  <div>
+  	<img src="chucky.png"/>
+  <button id="tellmejoke">Tell me a joke</button>
+  <div id="jokes"></div>
+  </div>
+  <script>
+  	$('#tellmejoke').on('click', function() {
+    $.ajax({
+        url: 'http://api.icndb.com/jokes/random',
+        success: function(telljoke){
+            var $jokes = $('#jokes');
+            $jokes.empty();
+            $.each(telljoke.value,function(id, joke){
+            	if (id == 'joke') {	
+             $jokes.append(joke);}
+        });
+      },
+      error: function(){
+        alert('error loading jokes');
+      }
+    });
+});
+</script>
+</body>
+</html>
